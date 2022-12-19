@@ -20,7 +20,7 @@ jobs:
                         make install
             -   save_cache:
                     key:
-                        v1-dependecies-{{ checksum:"requirements.txt" }}
+                        v1-dependencies-{{ checksum:"requirements.txt" }}
                     paths:
                         - ~/.devops
             -   run:
