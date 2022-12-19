@@ -40,7 +40,7 @@ workflows:
             -   docker/publish:
                     matrix:
                         parameters:
-                            image: [ $DOCKER_USERNAME/khoadd6-devops-capstone-project ]
+                            image: [ $DOCKER_LOGIN/khoadd6-devops-capstone-project ]
                             path: [ khoadd6-devops-capstone-project ]
                             docker-context: [ khoadd6-devops-capstone-project ]
                             deploy: [ true ]
