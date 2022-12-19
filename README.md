@@ -141,3 +141,17 @@ Cleanup Resources
 $ kubectl delete services udacity-app
 $ kubectl delete deployments udacity-app
 ```
+
+## Set up Circle CI
+
+Set up Project in Circle CI
+
+1. In CircleCI, click **Projects** in the sidebar
+2. Find your project and click the blue **Set Up Project** button next to it
+
+Set an environment variable in a project
+
+1. On the CircleCI web app, go to your project’s settings. You can do this two ways: Navigate to Projects on the side navigation, and then click the ellipsis button in the project’s row, or click the Project Settings button on the project’s individual Pipelines page.
+![img.png](img.png)
+2. Click on Environment Variables in the side navigation.
+3. Click the Add Variable button to enter a name and value of the new environment variable.

@@ -34,3 +34,13 @@ workflows:
     main:
         jobs:
             - build
+            -   docker/publish:
+                    matrix:
+                        parameters:
+                            image: [ $DOCKER_USERNAME/khoadd6-devops-capstone-project ]
+                            path: [ khoadd6-devops-capstone-project ]
+                            docker-context: [ khoadd6-devops-capstone-project ]
+                            deploy: [ true ]
+                            tag: [ 'v1.0.0' ]
+                            update-description: [ true ]
+                    reqires: [ build ]
