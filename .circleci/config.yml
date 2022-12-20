@@ -76,7 +76,7 @@ jobs:
     build-and-push-docker-image:
         docker:
             -   image: cimg/node:13.8.0
-        step:
+        steps:
             - checkout
             -   setup_remote_docker:
                     version: 19.03.13
