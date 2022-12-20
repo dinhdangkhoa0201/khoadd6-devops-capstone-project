@@ -2,6 +2,8 @@
 
 # KhoaDD6 Udacity Capstone Project
 
+Link of [website](http://afc650928dd764d54b1377a388375f0e-475601406.us-east-1.elb.amazonaws.com/)
+
 ## Steps to deploy v1
 
 1. [Setup EC2 Environment](#Setup-EC2-Environment)
