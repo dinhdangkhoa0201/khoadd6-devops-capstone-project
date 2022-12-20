@@ -1,0 +1,20 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+    name: udacity-capstone-project
+    region: us-east-1
+
+iam:
+    withOIDC: true
+
+nodeGroups:
+    -   name: capstone-project
+        instanceType: t3.small
+        amiFamily: AmazonLinux2
+        minSize: 2
+        maxSize: 3
+        volumeSize: 30
+        ssh:
+            allow: true
+            publicKeyName: khoadd6.devops

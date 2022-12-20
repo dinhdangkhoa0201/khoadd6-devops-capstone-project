@@ -1,5 +1,12 @@
 # KhoaDD6 Udacity Capstone Project
 
+## Steps
+
+1. [Setup Circle CI](#Setup Environment)
+2. [Setup EC2 Environment](#Setup Circle CI)
+3. [Docker](#Docker)
+4. [Kubernetes](#Kubernetes)
+
 ## Setup Environment
 
 1. Create an EC2 (Ubuntu 22.02)
@@ -77,13 +84,13 @@ $ docker version
 
 ## Docker
 
-Build Docker Image
+1. Build Docker Image
 
 ```sh
 $ docker build --tag khoadd6-devops-capstone-project .
 ```
 
-Push Docker Image
+2. Push Docker Image
 
 ```sh
 $ docker login -u dinhdangkhoa0201
@@ -91,7 +98,7 @@ $ docker tag khoadd6-devops-capstone-project dinhdangkhoa0201/khoadd6-devops-cap
 $ docker push dinhdangkhoa0201/khoadd6-devops-capstone-project:latest
 ```
 
-Run Docker Image
+3. Run Docker Image
 
 ```sh
 $ docker run -p 80:80 dinhdangkhoa0201/khoadd6-devops-capstone-project:latest
@@ -99,50 +106,58 @@ $ docker run -p 80:80 dinhdangkhoa0201/khoadd6-devops-capstone-project:latest
 
 ## Kubernetes
 
-Create an EKS Cluster
+1. Create an EKS Cluster
 
 ```sh
 $ eksctl create cluster --config-file=cluster.yml
 ```
 
-Deploy Kubernetes sources
+2. Deploy Kubernetes sources
 
 ```sh
 $ kubectl create deployment udacity-app --image=dinhdangkhoa0201/khoadd6-devops-capstone-project:latest --replicas=4
 ```
 
-Expose PORT
+3. Expose PORT
 
 ```sh
 $ kubectl expose deployment/udacity-app --type="LoadBalancer" --port 80
 ```
 
-List Deployments
+4. List Deployments
 
 ```sh
 $ kubectl get deployments -o wide
 ```
 
-List Services
+5. List Services
 
 ```sh
 $ kubectl get services -o wide
 ```
 
-List Pods
+6. List Pods
 
 ```sh
 $ kubectl get pods -o wide
 ```
 
-Cleanup Resources
+7. Cleanup Resources
 
 ```sh
 $ kubectl delete services udacity-app
 $ kubectl delete deployments udacity-app
 ```
 
-## Set up Circle CI
+## Amazon EKS
+
+Setup, file [cluster.yml](cluster.yml)
+
+```sh
+$ eksctl create cluster --config-file=cluster.yml
+```
+
+## Setup Circle CI
 
 Set up Project in Circle CI
 
@@ -151,7 +166,9 @@ Set up Project in Circle CI
 
 Set an environment variable in a project
 
-1. On the CircleCI web app, go to your project’s settings. You can do this two ways: Navigate to Projects on the side navigation, and then click the ellipsis button in the project’s row, or click the Project Settings button on the project’s individual Pipelines page.
-![img.png](img.png)
+1. On the CircleCI web app, go to your project’s settings. You can do this two ways: Navigate to
+   Projects on the side navigation, and then click the ellipsis button in the project’s row, or
+   click the Project Settings button on the project’s individual Pipelines page.
+   ![img.png](img.png)
 2. Click on Environment Variables in the side navigation.
 3. Click the Add Variable button to enter a name and value of the new environment variable.
