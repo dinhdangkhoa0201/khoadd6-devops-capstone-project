@@ -2,8 +2,8 @@
 
 ## Steps
 
-1. [Setup Circle CI](#Setup Environment)
-2. [Setup EC2 Environment](#Setup Circle CI)
+1. [Setup Circle CI](#Setup-Environment)
+2. [Setup EC2 Environment](#Setup-Circle-CI)
 3. [Docker](#Docker)
 4. [Kubernetes](#Kubernetes)
 
