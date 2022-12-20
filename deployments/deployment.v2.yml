@@ -16,6 +16,6 @@ spec:
         spec:
             containers:
                 -   name: udacity-capstone-app
-                    image: dinhdangkhoa0201/khoadd6-devops-capstone-project
+                    image: dinhdangkhoa0201/khoadd6-devops-capstone-project:v2.0.0
                     ports:
                         -   containerPort: 80

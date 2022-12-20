@@ -140,6 +140,26 @@ Default region name [None]:
 Default output format [None]:
 ```
 
+9. Install aws cli v2
+
+Install unzip
+
+```sh
+sudo apt install unzip
+```
+
+```sh
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+```
+
+```sh
+unzip awscliv2.zip
+```
+
+```sh
+sudo ./aws/install
+```
+
 ## Docker
 
 1. Build Docker Image
