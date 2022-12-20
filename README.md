@@ -1,4 +1,4 @@
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/dinhdangkhoa0201/khoadd6-devops-project3/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/dinhdangkhoa0201/khoadd6-devops-project3/tree/main)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/dinhdangkhoa0201/khoadd6-devops-capstone-project/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/dinhdangkhoa0201/khoadd6-devops-capstone-project/tree/main)
 
 # KhoaDD6 Udacity Capstone Project
 
