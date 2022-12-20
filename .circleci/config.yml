@@ -112,9 +112,9 @@ jobs:
                     command: |
                         export DOCKER_IMAGE=$DOCKER_LOGIN/khoadd6-devops-capstone-project:v1.0.0
 
-                        envsubst < /deployments/deployment.v1.yml | kubectl apply --filename -
+                        envsubst < deployments/deployment.v1.yml | kubectl apply --filename -
 
-                        envsubst < /deployments/service-green.v1.yml | kubectl apply --filename -
+                        envsubst < deployments/service-green.v1.yml | kubectl apply --filename -
 
     deploy-new-blue:
         docker:
@@ -131,7 +131,7 @@ jobs:
             -   run:
                     name: Target new version
                     command: |
-                        envsubst < /deployments/service.v2.yml | kubectl apply --filename -
+                        envsubst < deployments/service.v2.yml | kubectl apply --filename -
 
     remove-old-blue:
         docker:
