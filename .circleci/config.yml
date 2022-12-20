@@ -3,6 +3,36 @@ version: 2.1
 orbs:
     docker: circleci/docker@2.2.0
 
+commands:
+    install-awscli-gettext:
+        description: Install AWS CLI
+        steps:
+            -   run:
+                    name: Install AWS CLI
+                    command: |
+                        sudo apt update
+                        sudo apt-get install awscli
+                        sudo apt-get install gettext-base
+    install-aws-iam-authenticator:
+        description: Install aws-iam-authenticator
+        steps:
+            -   run:
+                    name: Install aws-iam-authenticator
+                    command: |
+                        curl -o aws-iam-authenticator curl -o aws-iam-authenticator \
+                            https://amazon-eks.s3-us-west-2.amazonaws.com/1.13.7/2019-06-11/bin/linux/amd64/aws-iam-authenticator
+                        chmod +x ./aws-iam-authenticator
+                        sudo mv ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
+    install-kubectl:
+        description: Install kubectl
+        steps:
+            -   run:
+                    name: Install kubectl
+                    command: |
+                        curl -o kubectl https://amazon-eks.s3-us-west-2.amazonaws.com/1.13.7/2019-06-11/bin/linux/amd64/kubectl
+                        chmod +x ./kubectl
+                        sudo mv ./kubectl /usr/local/bin/kubectl
+
 jobs:
     build:
         docker:
@@ -42,15 +72,101 @@ jobs:
                     path: ~/test-results
             -   store_artifacts:
                     path: ~/test-results
+    build-and-push-docker-image:
+        docker:
+            -   image: cimg/node:13.8.0
+            -   setup_remote_docker:
+                    version: 19.03.13
+            -   run:
+                    name: Build and Push
+                    command: |
+                        VERSION=v1.0.0
+
+                        # Build
+                        docker build --tag khoadd6-devops-capstone-project .
+
+                        # Login
+                        docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+                        docker tag khoadd6-devops-capstone-project $DOCKER_LOGIN/khoadd6-devops-capstone-project:${VERSION}
+
+                        # Push
+                        docker push $DOCKER_LOGIN/khoadd6-devops-capstone-project:${VERSION}
+
+    deploy-green:
+        docker:
+            -   image: cimg/python:3.7.13
+        steps:
+            - checkout
+            - install-awscli-gettext
+            - install-aws-iam-authenticator
+            - install-kubectl
+            -   run:
+                    name: Connect to cluster
+                    command: |
+                        aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --nane $CLUSTER_NAME
+            -   run:
+                    name: Deploy new version as green
+                    command: |
+                        export DOCKER_IMAGE=$DOCKER_LOGIN/khoadd6-devops-capstone-project:v1.0.0
+
+                        envsubst < /deployments/deployment.v1.yml | kubectl apply --filename -
+
+                        envsubst < /deployments/service-green.v1.yml | kubectl apply --filename -
+
+    deploy-blue:
+        docker:
+            -   image: cimg/python:3.7.13
+        steps:
+            - checkout
+            - install-awscli-gettext
+            - install-aws-iam-authenticator
+            - install-kubectl
+            -   run:
+                    name: Connect to cluster
+                    command: |
+                        aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --nane $CLUSTER_NAME
+            -   run:
+                    name: Target new version
+                    command: |
+                        envsubst < /deployments/service.v2.yml | kubectl apply --filename -
+
+    remove-old-blue:
+        docker:
+            -   image: cimg/python:3.7.13
+        steps:
+            - checkout
+            - install-awscli-gettext
+            - install-aws-iam-authenticator
+            - install-kubectl
+            -   run:
+                    name: Connect to cluster
+                    command: |
+                        aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --nane $CLUSTER_NAME
+            -   run:
+                    name: Remove the old version
+                    command: |
+                        for deploy in $(kubectl get deployments -o jsonpath="{.items[*].metadata.name}" | grep updacity-capstone-app);
+                        do
+                            if [[ $deploy != updacity-capstone-app:v2.0.0 ]];
+                            then
+                                kubectl delete deploymenets $deploy
+                            fi
+                        done
+
+                        if kubectl get services | grep udacity-capstone-app-green
+                        then
+                            kubectl delete services udacity-capstone-app-green
+                        fi
+
 workflows:
     main:
         jobs:
             - build
-            -   docker/publish:
-                    matrix:
-                        parameters:
-                            image: [ $DOCKER_LOGIN/khoadd6-devops-capstone-project ]
-                            deploy: [ true ]
-                            tag: [ 'v1.0.0' ]
-                            update-description: [ true ]
+            -   build-and-push-docker-image:
                     requires: [ build ]
+            -   deploy-green:
+                    requires: [ build-and-push-docker-image ]
+            -   deploy-new-blue:
+                    requires: [ deploy-green ]
+            -   remove-old-blue:
+                    requires: [ deploy-new-blue ]

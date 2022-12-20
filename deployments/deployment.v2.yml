@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+    name: udacity-capstone-app-v2.0.0
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: udacity-capstone-app
+            version: v2.0.0
+    template:
+        metadata:
+            labels:
+                app: udacity-capstone-app
+                version: v2.0.0
+        spec:
+            containers:
+                -   name: udacity-capstone-app
+                    image: dinhdangkhoa0201/khoadd6-devops-capstone-project
+                    ports:
+                        -   containerPort: 80

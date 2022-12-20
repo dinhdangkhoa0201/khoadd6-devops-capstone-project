@@ -103,6 +103,36 @@ docker version
 sudo apt install awscli
 ```
 
+- Configure **aws profile**
+
+```sh
+aws configure
+```
+
+- Paste Access Key ID
+
+```sh
+AWS Access Key ID [None]: 
+```
+
+- Paste Secret Access Key
+
+```sh
+AWS Secret Access Key [None]:  
+```
+
+- Default region (us-east-1)
+
+```sh
+Default region name [None]:  
+```
+
+- Default output format (json)
+
+```sh
+Default output format [None]:
+```
+
 ## Docker
 
 1. Build Docker Image
@@ -118,7 +148,7 @@ docker login -u dinhdangkhoa0201
 ```
 
 ```sh
-docker tag khoadd6-devops-capstone-project dinhdangkhoa0201/khoadd6-devops-capstone-project:latest0
+docker tag khoadd6-devops-capstone-project dinhdangkhoa0201/khoadd6-devops-capstone-project:latest
 ```
 
 ```sh
