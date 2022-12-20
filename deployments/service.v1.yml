@@ -6,7 +6,7 @@ spec:
     ports:
         -   port: 80
             targetPort: 80
-            protocol: tcp
+            protocol: TCP
             name: http
     selector:
         app: udacity-capstone-app
