@@ -5,6 +5,7 @@ install:
 	echo "Installing dependencies..."
 	pip install --upgrade pip
 	pip install --trusted-host pypi.python.org -r requirements.txt
+	pip install pytest
 
 install-hadolint:
 	wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.17.5/hadolint-Linux-x86_64
