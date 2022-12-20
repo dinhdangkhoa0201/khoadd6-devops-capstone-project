@@ -114,7 +114,7 @@ jobs:
 
                         envsubst < deployments/deployment.v1.yml | kubectl apply --filename -
 
-                        envsubst < deployments/service-green.v1.yml | kubectl apply --filename -
+                        envsubst < deployments/service-green.v2.yml | kubectl apply --filename -
 
     deploy-new-blue:
         docker:
