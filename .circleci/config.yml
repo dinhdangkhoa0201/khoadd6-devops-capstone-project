@@ -112,7 +112,7 @@ jobs:
                     command: |
                         export DOCKER_IMAGE=$DOCKER_LOGIN/khoadd6-devops-capstone-project:v1.0.0
 
-                        envsubst < deployments/deployment.v1.yml | kubectl apply --filename -
+                        envsubst < deployments/deployment.v2.yml | kubectl apply --filename -
 
                         envsubst < deployments/service-green.v2.yml | kubectl apply --filename -
 
