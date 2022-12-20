@@ -21,14 +21,23 @@ sudo apt update -y
 
 ```sh
 wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.10.0/hadolint-Linux-x86_64
-chmod +x /bin/hadolint
+```
+
+```sh
+sudo chmod +x /bin/hadolint
 ```
 
 5. Install **kubectl**
 
 ```sh
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+```
+
+```sh
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+```
+
+```sh
 kubectl version --client
 ```
 
@@ -36,7 +45,13 @@ kubectl version --client
 
 ```sh
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+```
+
+```sh
 sudo mv /tmp/eksctl /usr/local/bin
+```
+
+```sh
 eksctl version
 ```
 
@@ -94,7 +109,13 @@ docker build --tag khoadd6-devops-capstone-project .
 
 ```sh
 docker login -u dinhdangkhoa0201
+```
+
+```sh
 docker tag khoadd6-devops-capstone-project dinhdangkhoa0201/khoadd6-devops-capstone-project:latest0
+```
+
+```sh
 docker push dinhdangkhoa0201/khoadd6-devops-capstone-project:latest
 ```
 
@@ -146,6 +167,9 @@ kubectl get pods -o wide
 
 ```sh
 kubectl delete services udacity-app
+```
+
+```sh
 kubectl delete deployments udacity-app
 ```
 
