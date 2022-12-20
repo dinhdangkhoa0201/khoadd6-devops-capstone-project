@@ -72,9 +72,12 @@ jobs:
                     path: ~/test-results
             -   store_artifacts:
                     path: ~/test-results
+
     build-and-push-docker-image:
         docker:
             -   image: cimg/node:13.8.0
+        step:
+            - checkout
             -   setup_remote_docker:
                     version: 19.03.13
             -   run:
