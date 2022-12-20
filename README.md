@@ -1,15 +1,18 @@
-
-
 # KhoaDD6 Udacity Capstone Project
 
-## Steps
+## Steps to deploy v1
 
-1. [Setup EC2 Environment](#Setup-Environment)
-2. [Setup Circle CI](#Setup-Circle-CI)
-3. [Docker](#Docker)
-4. [Kubernetes](#Kubernetes)
+1. [Setup EC2 Environment](#Setup-EC2-Environment)
+2. [Docker](#Docker)
+3. [Kubernetes](#Kubernetes)
 
-## Setup Environment
+## Steps to deploy v2
+
+1. [Setup Circle CI](#Setup-Circle-CI)
+2. Change content of application
+3. Push code to branch `main`
+
+## Setup EC2 Environment
 
 1. Create an EC2 (Ubuntu 22.02)
 2. SSH to this EC2
@@ -171,19 +174,19 @@ docker run -p 80:80 dinhdangkhoa0201/khoadd6-devops-capstone-project:latest
 eksctl create cluster --config-file=cluster.yml
 ```
 
-2. Deploy Kubernetes sources
+2. Create Deployment
 
 ```sh
-kubectl create deployment udacity-app --image=dinhdangkhoa0201/khoadd6-devops-capstone-project:latest --replicas=4
+kubectl apply -f deployments/deployment.v1.yml
 ```
 
-3. Expose PORT
+3. Create Service
 
 ```sh
-kubectl expose deployment/udacity-app --type="LoadBalancer" --port 80
+kubectl apply -f deployments/service.v1.yml
 ```
 
-4. List Deployments
+5. List Deployments
 
 ```sh
 kubectl get deployments -o wide
@@ -234,3 +237,8 @@ Set an environment variable in a project
    ![img.png](img.png)
 2. Click on Environment Variables in the side navigation.
 3. Click the Add Variable button to enter a name and value of the new environment variable.
+
+    - DOCKER_LOGIN
+    - DOCKER_PASSWORD
+    - AWS_ACCESS_KEY_ID
+    - AWS_SECRET_KEY_ID
