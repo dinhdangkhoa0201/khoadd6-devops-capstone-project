@@ -83,7 +83,7 @@ jobs:
             -   run:
                     name: Build and Push
                     command: |
-                        VERSION=v1.0.0
+                        VERSION=v2.0.0
 
                         # Build
                         docker build --tag khoadd6-devops-capstone-project .
