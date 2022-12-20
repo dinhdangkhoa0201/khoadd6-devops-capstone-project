@@ -4,6 +4,8 @@
 
 Link of [website](http://afc650928dd764d54b1377a388375f0e-475601406.us-east-1.elb.amazonaws.com/)
 
+Link of [github](https://github.com/dinhdangkhoa0201/khoadd6-devops-capstone-project)
+
 ## Steps to deploy v1
 
 1. [Setup EC2 Environment](#Setup-EC2-Environment)
