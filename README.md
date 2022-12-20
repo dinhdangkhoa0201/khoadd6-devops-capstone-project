@@ -97,6 +97,12 @@ sudo usermod -aG docker ubuntu
 docker version
 ```
 
+8. Install AWS CLI
+
+```sh
+sudo apt install awscli
+```
+
 ## Docker
 
 1. Build Docker Image
