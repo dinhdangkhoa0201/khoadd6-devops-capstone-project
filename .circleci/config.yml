@@ -106,7 +106,7 @@ jobs:
             -   run:
                     name: Connect to cluster
                     command: |
-                        aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --nane $CLUSTER_NAME
+                        aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --nane udacity-capstone-project
             -   run:
                     name: Deploy new version as green
                     command: |
@@ -127,7 +127,7 @@ jobs:
             -   run:
                     name: Connect to cluster
                     command: |
-                        aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --nane $CLUSTER_NAME
+                        aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --nane udacity-capstone-project
             -   run:
                     name: Target new version
                     command: |
@@ -144,7 +144,7 @@ jobs:
             -   run:
                     name: Connect to cluster
                     command: |
-                        aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --nane $CLUSTER_NAME
+                        aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --nane udacity-capstone-project
             -   run:
                     name: Remove the old version
                     command: |
