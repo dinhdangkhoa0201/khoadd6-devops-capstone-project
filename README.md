@@ -175,7 +175,7 @@ kubectl delete deployments udacity-app
 
 ## Amazon EKS
 
-Setup, file [cluster.yml](cluster.yml)
+Create EKS Cluster, file [cluster.yml](cluster.yml)
 
 ```sh
 eksctl create cluster --config-file=cluster.yml
