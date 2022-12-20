@@ -33,6 +33,15 @@ jobs:
                     command: |
                         source ~/.devops/bin/activate
                         make lint
+            -   run:
+                    name: Run test
+                    command: |
+                        source ~/.devops/bin/activate
+                        make test
+            -   store_test_results:
+                    path: ~/test-results
+            -   store_artifacts:
+                    path: ~/test-results
 workflows:
     main:
         jobs:
